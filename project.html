@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Polyglot Academy - Learn Languages</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    :root {
+      --primary: #4361ee;
+      --secondary: #3a0ca3;
+      --accent: #f72585;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --success: #4cc9f0;
+      --warning: #f9c74f;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: var(--light);
+      line-height: 1.6;
+      min-height: 100vh;
+      padding-bottom: 2rem;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    
+    /* Navigation */
+    nav {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 1.2rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: white;
+      display: flex;
+      align-items: center;
+    }
+    
+    .logo i {
+      margin-right: 0.5rem;
+      color: var(--warning);
+    }
+    
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+    
+    .nav-links li {
+      margin-left: 2rem;
+      position: relative;
+    }
+    
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 0;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+    }
+    
+    .nav-links a i {
+      margin-right: 0.5rem;
+    }
+    
+    .nav-links a:hover {
+      color: var(--warning);
+    }
+    
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--warning);
+      transition: width 0.3s ease;
+    }
+    
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+    
+    /* Header */
+    header {
+      text-align: center;
+      padding: 4rem 0;
+      animation: fadeIn 1s ease;
+    }
+    
+    header h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    
+    header p {
+      font-size: 1.4rem;
+      max-width: 600px;
+      margin: 0 auto;
+      opacity: 0.9;
+    }
+    
+    /* Language Cards */
+    .languages {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+    
+    .language-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+      animation: slideUp 0.5s ease;
+    }
+    
+    .language-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      background: rgba(255, 255, 255, 0.15);
+    }
+    
+    .language-card i {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: var(--warning);
+    }
+    
+    .language-card h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    
+    .language-card p {
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+    }
+    
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      padding: 0.8rem 1.8rem;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .btn:hover {
+      background: var(--primary);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Features */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin: 4rem 0;
+    }
+    
+    .feature {
+      text-align: center;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+    
+    .feature:hover {
+      transform: scale(1.05);
+      background: rgba(255, 255, 255, 0.15);
+    }
+    
+    .feature i {
+      font-size: 2.5rem;
+      color: var(--success);
+      margin-bottom: 1rem;
+    }
+    
+    .feature h3 {
+      margin-bottom: 1rem;
+    }
+    
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      margin-top: 4rem;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+    }
+    
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Page Content */
+    .page-content {
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+    
+    .active-page {
+      display: block;
+    }
+    
+    /* About Page */
+    .about-content {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      padding: 2.5rem;
+      margin: 2rem 0;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+    
+    .about-content h2 {
+      margin-bottom: 1.5rem;
+      color: var(--warning);
+    }
+    
+    .team {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+    
+    .team-member {
+      text-align: center;
+      padding: 1.5rem;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+    
+    .team-member:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.15);
+    }
+    
+    .team-member img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1rem;
+      border: 4px solid var(--success);
+    }
+    
+    /* Contact Page */
+    .contact-content {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      padding: 2.5rem;
+      margin: 2rem 0;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+    
+    .contact-form {
+      display: grid;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .form-group label {
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+      padding: 1rem;
+      border: none;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-size: 1rem;
+    }
+    
+    .form-group textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+    
+    .contact-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .info-card {
+      display: flex;
+      align-items: center;
+      padding: 1.5rem;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+    
+    .info-card:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.15);
+    }
+    
+    .info-card i {
+      font-size: 2rem;
+      margin-right: 1rem;
+      color: var(--accent);
+    }
+    
+    /* Language Flags */
+    .flag {
+      width: 80px;
+      height: 60px;
+      margin: 0 auto 1rem;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      border: 2px solid white;
+    }
+    
+    .french-flag {
+      background: linear-gradient(to right, #0055A4 0%, #0055A4 33%, #FFFFFF 33%, #FFFFFF 66%, #EF4135 66%, #EF4135 100%);
+    }
+    
+    .german-flag {
+      background: linear-gradient(to bottom, #000000 0%, #000000 33%, #DD0000 33%, #DD0000 66%, #FFCE00 66%, #FFCE00 100%);
+    }
+    
+    .japanese-flag {
+      background: white;
+      position: relative;
+    }
+    
+    .japanese-flag::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 35px;
+      height: 35px;
+      background: #BC002D;
+      border-radius: 50%;
+    }
+    
+    .spanish-flag {
+      background: linear-gradient(to bottom, #AA151B 0%, #AA151B 25%, #F1BF00 25%, #F1BF00 75%, #AA151B 75%, #AA151B 100%);
+    }
+    
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.3s ease;
+    }
+    
+    .modal-content {
+      background: white;
+      width: 90%;
+      max-width: 600px;
+      border-radius: 12px;
+      overflow: hidden;
+      animation: slideUp 0.3s ease;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    
+    .modal-header {
+      background: var(--primary);
+      color: white;
+      padding: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .modal-header h2 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .close-modal {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    
+    .modal-body {
+      padding: 1.5rem;
+      color: var(--dark);
+    }
+    
+    .word-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .word-card {
+      background: #f8f9fa;
+      padding: 1rem;
+      border-radius: 8px;
+      border-left: 4px solid var(--primary);
+    }
+    
+    .word-original {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+    
+    .word-pronunciation {
+      color: #6c757d;
+      font-style: italic;
+      margin-bottom: 0.5rem;
+    }
+    
+    .word-translation {
+      color: #495057;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .nav-container {
+        flex-direction: column;
+      }
+      
+      .nav-links {
+        margin-top: 1rem;
+      }
+      
+      .nav-links li {
+        margin: 0 1rem;
+      }
+      
+      header h1 {
+        font-size: 2.5rem;
+      }
+      
+      header p {
+        font-size: 1.2rem;
+      }
+      
+      .word-list {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="container nav-container">
+      <div class="logo">
+        <i class="fas fa-language"></i>
+        <span>Polyglot Academy</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#" class="nav-link" data-page="home"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="#" class="nav-link" data-page="about"><i class="fas fa-info-circle"></i> About</a></li>
+        <li><a href="#" class="nav-link" data-page="contact"><i class="fas fa-envelope"></i> Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <!-- Home Page -->
+    <div id="home" class="page-content active-page">
+      <header>
+        <h1>Learn Languages with Ease</h1>
+        <p>Discover the joy of learning new languages through our interactive courses and expert guidance.</p>
+      </header>
+
+      <div class="languages">
+        <div class="language-card" onclick="showLanguage('french')">
+          <div class="flag french-flag"></div>
+          <h3>French</h3>
+          <p>Master the language of love and diplomacy with our comprehensive French courses.</p>
+          <div class="btn">Learn French</div>
+        </div>
+        
+        <div class="language-card" onclick="showLanguage('german')">
+          <div class="flag german-flag"></div>
+          <h3>German</h3>
+          <p>Explore the language of poets and thinkers with our structured German program.</p>
+          <div class="btn">Learn German</div>
+        </div>
+        
+        <div class="language-card" onclick="showLanguage('japanese')">
+          <div class="flag japanese-flag"></div>
+          <h3>Japanese</h3>
+          <p>Dive into the fascinating world of Japanese language and culture with our courses.</p>
+          <div class="btn">Learn Japanese</div>
+        </div>
+        
+        <div class="language-card" onclick="showLanguage('spanish')">
+          <div class="flag spanish-flag"></div>
+          <h3>Spanish</h3>
+          <p>Learn one of the world's most spoken languages with our engaging Spanish program.</p>
+          <div class="btn">Learn Spanish</div>
+        </div>
+      </div>
+
+      <div class="features">
+        <div class="feature">
+          <i class="fas fa-graduation-cap"></i>
+          <h3>Expert Teachers</h3>
+          <p>Learn from native speakers with years of teaching experience.</p>
+        </div>
+        
+        <div class="feature">
+          <i class="fas fa-laptop"></i>
+          <h3>Interactive Lessons</h3>
+          <p>Engage with interactive exercises and real-life conversations.</p>
+        </div>
+        
+        <div class="feature">
+          <i class="fas fa-certificate"></i>
+          <h3>Certification</h3>
+          <p>Receive recognized certificates upon course completion.</p>
+        </div>
+        
+        <div class="feature">
+          <i class="fas fa-users"></i>
+          <h3>Community</h3>
+          <p>Join a community of language learners from around the world.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- About Page -->
+    <div id="about" class="page-content">
+      <header>
+        <h1>About Polyglot Academy</h1>
+        <p>Discover our mission, values, and the team behind your language learning journey.</p>
+      </header>
+
+      <div class="about-content">
+        <h2>Our Story</h2>
+        <p>Founded in 2015, Polyglot Academy began with a simple mission: to make language learning accessible, engaging, and effective for everyone. What started as a small tutoring service has grown into a comprehensive online platform serving thousands of students worldwide.</p>
+        
+        <p>We believe that learning a new language opens doors to new cultures, perspectives, and opportunities. Our team of dedicated educators and language enthusiasts is committed to providing the highest quality language education.</p>
+        
+        <h2>Our Approach</h2>
+        <p>At Polyglot Academy, we use a communicative approach to language teaching. We focus on practical communication skills, cultural understanding, and real-world application. Our courses are designed to be immersive, interactive, and tailored to different learning styles.</p>
+        
+        <h2>Meet Our Team</h2>
+        <div class="team">
+          <div class="team-member">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Team Member">
+            <h3>Mark Johnson</h3>
+            <p>Founder & CEO</p>
+          </div>
+          
+          <div class="team-member">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Team Member">
+            <h3>Julie Rodriguez</h3>
+            <p>Head of Education</p>
+          </div>
+          
+          <div class="team-member">
+            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Team Member">
+            <h3>David Tim</h3>
+            <p>Technical Director</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Page -->
+    <div id="contact" class="page-content">
+      <header>
+        <h1>Get In Touch</h1>
+        <p>Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+      </header>
+
+      <div class="contact-content">
+        <h2>Send Us a Message</h2>
+        <form class="contact-form">
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" placeholder="Enter your name">
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="Enter your email">
+          </div>
+          
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" placeholder="Enter the subject">
+          </div>
+          
+          <div class="form-group">
+            <label for="message">Your Message</label>
+            <textarea id="message" placeholder="Type your message here"></textarea>
+          </div>
+          
+          <button type="submit" class="btn">Send Message</button>
+        </form>
+        
+        <div class="contact-info">
+          <div class="info-card">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+              <h3>Visit Us</h3>
+              <p>00100 Nairobi, Kenya</p>
+            </div>
+          </div>
+          
+          <div class="info-card">
+            <i class="fas fa-phone"></i>
+            <div>
+              <h3>Call Us</h3>
+              <p>+254703480282</p>
+            </div>
+          </div>
+          
+          <div class="info-card">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <h3>Email Us</h3>
+              <p>info@polyglotacademy.com</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2025 Polyglot Academy. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <!-- Language Modal -->
+  <div class="modal" id="languageModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2><span id="modalFlag" class="flag"></span> <span id="modalTitle"></span> Basics</h2>
+        <button class="close-modal" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Here are some basic words and phrases to get you started:</p>
+        <div class="word-list" id="wordList">
+          <!-- Words will be inserted here by JavaScript -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Language data
+    const languageData = {
+      french: {
+        title: "French",
+        flagClass: "french-flag",
+        words: [
+          { original: "Bonjour", pronunciation: "bohn-zhoor", translation: "Hello / Good day" },
+          { original: "Merci", pronunciation: "mehr-see", translation: "Thank you" },
+          { original: "Oui / Non", pronunciation: "wee / nohn", translation: "Yes / No" },
+          { original: "S'il vous plaît", pronunciation: "seel voo play", translation: "Please" },
+          { original: "Comment ça va?", pronunciation: "koh-mahn sah vah", translation: "How are you?" },
+          { original: "Je m'appelle...", pronunciation: "zhuh mah-pell", translation: "My name is..." },
+          { original: "Au revoir", pronunciation: "oh ruh-vwahr", translation: "Goodbye" }
+        ]
+      },
+      german: {
+        title: "German",
+        flagClass: "german-flag",
+        words: [
+          { original: "Hallo", pronunciation: "hah-loh", translation: "Hello" },
+          { original: "Danke", pronunciation: "dahn-keh", translation: "Thank you" },
+          { original: "Ja / Nein", pronunciation: "yah / nine", translation: "Yes / No" },
+          { original: "Bitte", pronunciation: "bit-teh", translation: "Please / You're welcome" },
+          { original: "Wie geht's?", pronunciation: "vee gayts", translation: "How are you?" },
+          { original: "Ich heiße...", pronunciation: "ish high-seh", translation: "My name is..." },
+          { original: "Auf Wiedersehen", pronunciation: "owf vee-der-zayn", translation: "Goodbye" }
+        ]
+      },
+      japanese: {
+        title: "Japanese",
+        flagClass: "japanese-flag",
+        words: [
+          { original: "こんにちは", pronunciation: "kon-nichi-wa", translation: "Hello" },
+          { original: "ありがとう", pronunciation: "a-ri-ga-tou", translation: "Thank you" },
+          { original: "はい / いいえ", pronunciation: "hai / iie", translation: "Yes / No" },
+          { original: "お願いします", pronunciation: "o-ne-gai-shi-mas", translation: "Please" },
+          { original: "お元気ですか?", pronunciation: "o-gen-ki-des-ka", translation: "How are you?" },
+          { original: "私の名前は...", pronunciation: "wa-ta-shi no na-ma-e wa", translation: "My name is..." },
+          { original: "さようなら", pronunciation: "sa-yo-na-ra", translation: "Goodbye" }
+        ]
+      },
+      spanish: {
+        title: "Spanish",
+        flagClass: "spanish-flag",
+        words: [
+          { original: "Hola", pronunciation: "oh-lah", translation: "Hello" },
+          { original: "Gracias", pronunciation: "grah-see-ahs", translation: "Thank you" },
+          { original: "Sí / No", pronunciation: "see / noh", translation: "Yes / No" },
+          { original: "Por favor", pronunciation: "por fah-vor", translation: "Please" },
+          { original: "¿Cómo estás?", pronunciation: "koh-moh es-tahs", translation: "How are you?" },
+          { original: "Me llamo...", pronunciation: "meh yah-moh", translation: "My name is..." },
+          { original: "Adiós", pronunciation: "ah-dee-ohs", translation: "Goodbye" }
+        ]
+      }
+    };
+
+    // Navigation between pages
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const pageId = this.getAttribute('data-page');
+        
+        // Hide all pages
+        document.querySelectorAll('.page-content').forEach(page => {
+          page.classList.remove('active-page');
+        });
+        
+        // Show the selected page
+        document.getElementById(pageId).classList.add('active-page');
+        
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+    
+    // Show language modal with basic words
+    function showLanguage(lang) {
+      const data = languageData[lang];
+      if (!data) return;
+      
+      const modal = document.getElementById('languageModal');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalFlag = document.getElementById('modalFlag');
+      const wordList = document.getElementById('wordList');
+      
+      // Set modal content
+      modalTitle.textContent = data.title;
+      modalFlag.className = 'flag ' + data.flagClass;
+      
+      // Clear previous words
+      wordList.innerHTML = '';
+      
+      // Add words to the list
+      data.words.forEach(word => {
+        const wordCard = document.createElement('div');
+        wordCard.className = 'word-card';
+        wordCard.innerHTML = `
+          <div class="word-original">${word.original}</div>
+          <div class="word-pronunciation">${word.pronunciation}</div>
+          <div class="word-translation">${word.translation}</div>
+        `;
+        wordList.appendChild(wordCard);
+      });
+      
+      // Show modal
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+    
+    // Close modal
+    function closeModal() {
+      const modal = document.getElementById('languageModal');
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+    
+    // Close modal when clicking outside content
+    document.getElementById('languageModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeModal();
+      }
+    });
+    
+    // Form submission (placeholder function)
+    document.querySelector('.contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Thank you for your message! We will get back to you soon.');
+      this.reset();
+    });
+  </script>
+</body>
+</html>
